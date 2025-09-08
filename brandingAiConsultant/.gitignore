@@ -1,7 +1,9 @@
-# ===== Env files (nunca versionar) =====
+# acrescenta (ou garante) regras de ignore
+cat >> .gitignore <<'EOF'
+# ==== Env files (não versionar) ====
 .env
 .env.*
-!.env.example
+!*.env.example
 
 server/.env
 server/.env.*
@@ -9,18 +11,25 @@ server/.env.*
 
 web/.env
 web/.env.*
+web/.env.local
+web/.env.development.local
+web/.env.production.local
 !web/.env.example
 
-# Next.js build/temps
+# Node / Next
+web/node_modules/
 web/.next/
 web/out/
 
-# Python venv
+# Python
 server/.venv/
+server/__pycache__/
+**/*.pyc
 
-# Node modules
-**/node_modules/
-
-# OS/Editor
-.DS_Store
+# Logs / SO / Editor
 *.log
+.DS_Store
+EOF
+
+# teste de ignore
+git check-ignore -v server/.env || echo "Regra aplicada; se 'git status' não mostrar server/.env, está ok."
