@@ -1,0 +1,15 @@
+import { redirect } from "next/navigation";
+import { serverGetMe } from "@/app/lib/auth";
+import { Navbar } from "@/app/components/Navbar";
+
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const me = await serverGetMe();
+  if (!me) redirect("/auth/login");
+
+  return (
+    <div className="min-h-dvh">
+      <Navbar />
+      <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
+    </div>
+  );
+}

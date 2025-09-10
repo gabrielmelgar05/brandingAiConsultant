@@ -1,0 +1,45 @@
+@import "tailwindcss/preflight";
+@tailwind utilities;
+
+/* Cores base do sistema */
+:root {
+  --bg: #ffffff;
+  --fg: #0b0b0b;     /* preto */
+  --muted: #6b7280;  /* cinza */
+  --accent: #ffc700; /* amarelo */
+}
+
+.dark {
+  --bg: #0b0b0b;     /* preto */
+  --fg: #ffffff;     /* branco */
+  --muted: #9ca3af;
+  --accent: #ffc700;
+}
+
+html, body { height: 100%; }
+body { @apply bg-[var(--bg)] text-[var(--fg)] antialiased; }
+
+.btn {
+  @apply inline-flex items-center gap-2 rounded-2xl px-4 py-2 font-medium transition;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #0b0b0b;
+}
+.btn-outline {
+  @apply border;
+  border-color: color-mix(in oklab, var(--fg) 20%, transparent);
+}
+.card {
+  @apply rounded-2xl p-6 shadow;
+  background: color-mix(in oklab, var(--bg) 95%, var(--fg));
+  border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
+}
+.input {
+  @apply w-full rounded-xl border px-3 py-2 outline-none;
+  border-color: color-mix(in oklab, var(--fg) 20%, transparent);
+  background: color-mix(in oklab, var(--bg) 95%, var(--fg));
+  color: var(--fg);
+}
+.label { @apply text-sm font-medium text-[var(--muted)]; }
+.link { color: var(--accent); }
