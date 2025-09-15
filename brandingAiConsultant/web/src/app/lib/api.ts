@@ -26,5 +26,5 @@ export async function api<T>(
     throw new Error(msg);
   }
   const ct = res.headers.get("content-type") || "";
-  return (ct.includes("application/json") ? res.json() : (res.text() as unknown)) as T;
+  return ct.includes("application/json") ? (await res.json() as T) : (await res.text() as T);
 }

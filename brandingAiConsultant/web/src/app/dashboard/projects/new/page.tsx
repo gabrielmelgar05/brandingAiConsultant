@@ -24,7 +24,7 @@ export default function NewProjectPage() {
           </select>
         </div>
         <button className="btn btn-primary" onClick={() => r.push(`/projects/1`)}>
-          Criar (stub)
+          Criar (exemplo)
         </button>
       </div>
     </div>

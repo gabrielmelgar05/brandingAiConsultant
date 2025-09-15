@@ -3,9 +3,8 @@ export default function DeliverablesPage() {
     <div className="space-y-3">
       <h2 className="text-xl font-semibold">Entregáveis</h2>
       <div className="card">
-        <p className="text-[var(--muted)]">
-          Após gerar seus assets, eles aparecerão em <code>/static</code> da API.
-          Ex.: SVG da logo e teaser MP4.
+        <p style={{ color:"var(--muted)" }}>
+          Após gerar seus assets, eles aparecerão em <code>/static</code> na API (SVG/PNG da logo, teaser MP4).
         </p>
       </div>
     </div>

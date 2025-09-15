@@ -8,7 +8,7 @@ export default function ProjectsPage() {
         <Link href="/projects/new" className="btn btn-primary">Novo projeto</Link>
       </div>
       <div className="card">
-        <p className="text-[var(--muted)]">Você ainda não tem projetos.</p>
+        <p style={{ color:"var(--muted)" }}>Você ainda não tem projetos.</p>
       </div>
     </div>
   );

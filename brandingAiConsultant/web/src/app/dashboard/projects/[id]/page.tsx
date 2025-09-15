@@ -8,15 +8,15 @@ export default function ProjectOverviewPage() {
       <div className="grid gap-4 md:grid-cols-3">
         <Link href={`/projects/${id}/brief`} className="card hover:shadow-lg">
           <h3 className="font-semibold">Brief</h3>
-          <p className="text-sm text-[var(--muted)]">Alimente com sua ideia e objetivos.</p>
+          <p className="text-sm" style={{ color:"var(--muted)" }}>Valide a ideia e metas.</p>
         </Link>
         <Link href={`/projects/${id}/logo`} className="card hover:shadow-lg">
           <h3 className="font-semibold">Logo</h3>
-          <p className="text-sm text-[var(--muted)]">Gere SVG com base na paleta e estilo.</p>
+          <p className="text-sm" style={{ color:"var(--muted)" }}>Gere uma logo em SVG/PNG.</p>
         </Link>
         <Link href={`/projects/${id}/deliverables`} className="card hover:shadow-lg">
           <h3 className="font-semibold">Entregáveis</h3>
-          <p className="text-sm text-[var(--muted)]">Baixe assets e teaser.</p>
+          <p className="text-sm" style={{ color:"var(--muted)" }}>Baixe assets e teaser.</p>
         </Link>
       </div>
     </div>

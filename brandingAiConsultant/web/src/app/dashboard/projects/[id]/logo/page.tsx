@@ -22,10 +22,10 @@ export default function LogoPage() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       <div className="card space-y-3">
-        <h2 className="text-xl font-semibold">Gerar logo (SVG)</h2>
+        <h2 className="text-xl font-semibold">Gerar logo</h2>
         <label className="label">Nome</label>
         <input className="input" value={name} onChange={e=>setName(e.target.value)} />
-        <label className="label">Paleta (separada por vírgulas)</label>
+        <label className="label">Paleta (hex separados por vírgula)</label>
         <input className="input" value={palette} onChange={e=>setPalette(e.target.value)} />
         <label className="label">Estilo</label>
         <input className="input" value={style} onChange={e=>setStyle(e.target.value)} />
@@ -45,7 +45,7 @@ export default function LogoPage() {
         {imgUrl ? (
           <img src={imgUrl} alt="Logo gerada" className="w-full rounded-xl" />
         ) : (
-          <p className="text-[var(--muted)]">Gere a logo para visualizar aqui…</p>
+          <p style={{ color:"var(--muted)" }}>Gere a logo para visualizar aqui…</p>
         )}
       </div>
     </div>

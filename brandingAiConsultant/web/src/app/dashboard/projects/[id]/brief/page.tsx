@@ -8,7 +8,7 @@ export default function BriefPage() {
   const [audience, setAudience] = useState("");
   const [budget, setBudget] = useState("");
   const [goal, setGoal] = useState("");
-  const [out, setOut] = useState<string>("");
+  const [out, setOut] = useState("");
 
   async function analyze() {
     setOut("");
@@ -30,7 +30,9 @@ export default function BriefPage() {
         <input className="input" placeholder="Meta" value={goal} onChange={e=>setGoal(e.target.value)} />
         <button className="btn btn-primary" onClick={analyze}>Analisar brief</button>
       </div>
-      <div className="card whitespace-pre-wrap">{out || <span className="text-[var(--muted)]">O resultado aparecerá aqui…</span>}</div>
+      <div className="card whitespace-pre-wrap">
+        {out || <span style={{ color:"var(--muted)" }}>O resultado aparecerá aqui…</span>}
+      </div>
     </div>
   );
 }
