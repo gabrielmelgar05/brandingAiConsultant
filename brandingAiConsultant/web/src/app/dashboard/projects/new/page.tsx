@@ -10,22 +10,20 @@ export default function NewProjectPage() {
   return (
     <div className="max-w-xl">
       <h1 className="mb-4 text-2xl font-bold">Novo projeto</h1>
-      <div className="card space-y-4">
+      <div className="glass space-y-4 p-6">
         <div>
-          <label className="label">Nome da marca</label>
+          <label className="mb-1 block text-sm opacity-80">Nome da marca</label>
           <input className="input" value={name} onChange={e=>setName(e.target.value)} />
         </div>
         <div>
-          <label className="label">Plano</label>
-          <select className="input" value={plan} onChange={e=>setPlan(e.target.value as "starter" | "pro" | "champions")}>
+          <label className="mb-1 block text-sm opacity-80">Plano</label>
+          <select className="input" value={plan} onChange={e=>setPlan(e.target.value as any)}>
             <option value="starter">Starter</option>
             <option value="pro">Pro</option>
             <option value="champions">Champions</option>
           </select>
         </div>
-        <button className="btn btn-primary" onClick={() => r.push(`/projects/1`)}>
-          Criar (exemplo)
-        </button>
+        <button className="btn btn-primary" onClick={() => r.push(`/projects/1`)}>Criar (exemplo)</button>
       </div>
     </div>
   );

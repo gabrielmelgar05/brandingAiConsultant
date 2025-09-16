@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { api } from "@/app/lib/api";
+import { api } from "../../../../../lib/api";
 
 export default function LogoPage() {
   const [name, setName] = useState("NEXUS");
@@ -21,32 +21,29 @@ export default function LogoPage() {
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      <div className="card space-y-3">
+      <div className="glass space-y-3 p-6">
         <h2 className="text-xl font-semibold">Gerar logo</h2>
-        <label className="label">Nome</label>
+        <label className="mb-1 block text-sm opacity-80">Nome</label>
         <input className="input" value={name} onChange={e=>setName(e.target.value)} />
-        <label className="label">Paleta (hex separados por vírgula)</label>
+        <label className="mb-1 block text-sm opacity-80">Paleta (hex separados por vírgula)</label>
         <input className="input" value={palette} onChange={e=>setPalette(e.target.value)} />
-        <label className="label">Estilo</label>
+        <label className="mb-1 block text-sm opacity-80">Estilo</label>
         <input className="input" value={style} onChange={e=>setStyle(e.target.value)} />
         <div className="flex items-center gap-3">
           <input id="icon" type="checkbox" checked={withIcon} onChange={e=>setWithIcon(e.target.checked)} />
-          <label htmlFor="icon" className="label">Com ícone</label>
+          <label htmlFor="icon" className="text-sm opacity-80">Com ícone</label>
         </div>
-        <label className="label">Layout</label>
-        <select className="input" value={layout} onChange={e=>setLayout(e.target.value as "horizontal" | "stack" | "only-icon")}>
+        <label className="mb-1 block text-sm opacity-80">Layout</label>
+        <select className="input" value={layout} onChange={e=>setLayout(e.target.value as any)}>
           <option value="horizontal">Horizontal</option>
           <option value="stack">Empilhado</option>
           <option value="only-icon">Só ícone</option>
         </select>
         <button className="btn btn-primary" onClick={generate}>Gerar</button>
       </div>
-      <div className="card">
-        {imgUrl ? (
-          <img src={imgUrl} alt="Logo gerada" className="w-full rounded-xl" />
-        ) : (
-          <p style={{ color:"var(--muted)" }}>Gere a logo para visualizar aqui…</p>
-        )}
+      <div className="glass p-6">
+        {imgUrl ? <img src={imgUrl} alt="Logo gerada" className="w-full rounded-xl" /> :
+          <p className="opacity-70">Gere a logo para visualizar aqui…</p>}
       </div>
     </div>
   );

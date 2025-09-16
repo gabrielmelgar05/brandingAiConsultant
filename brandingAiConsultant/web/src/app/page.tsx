@@ -1,32 +1,25 @@
-import Link from "next/link";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
 
-export default function Home() {
+export default function Page() {
   return (
-    <main className="container-md py-16">
-      <h1 className="mb-3 text-4xl font-extrabold tracking-tight">
-        Crie sua marca com IA local
-      </h1>
-      <p className="mb-8 max-w-2xl" style={{ color: "var(--muted)" }}>
-        Visual, posicionamento e plano de ação — com modelos rodando no seu PC.
-      </p>
-      <div className="flex gap-3">
-        <Link href="/auth/register" className="btn btn-primary">Começar agora</Link>
-        <Link href="/auth/login" className="btn btn-outline">Já tenho conta</Link>
-      </div>
+    <main>
+      <Navbar />
+      <Hero />
 
-      <hr className="my-10 border-t hr" />
-
-      <section className="grid gap-6 md:grid-cols-3">
-        {[
-          ["Brief", "Cole a ideia e objetivos; validamos o que é realista."],
-          ["Diretrizes visuais", "Paleta P/B + #ffc700, tipografia e exemplos."],
-          ["Entregáveis", "Logo (SVG/PNG), cartão, teaser curto, plano de 90 dias."],
-        ].map(([t, d]) => (
-          <div key={t} className="card">
-            <h3 className="mb-1 text-lg font-semibold">{t}</h3>
-            <p style={{ color: "var(--muted)" }}>{d}</p>
-          </div>
-        ))}
+      <section id="como-funciona" className="pb-24">
+        <div className="container-md grid gap-6 md:grid-cols-3">
+          {[
+            ["Brief inteligente", "Valida metas e pede o que falta para tornar realista."],
+            ["Diretrizes visuais", "Logo, tipografia e uso de cores (PB + #ffc700)."],
+            ["Plano de 90 dias", "Ações semanais, canais e metas de custo/retorno."],
+          ].map(([t, s]) => (
+            <div key={t} className="glass p-6">
+              <h3 className="mb-2 text-lg font-semibold">{t}</h3>
+              <p className="opacity-80">{s}</p>
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );

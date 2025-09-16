@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { api } from "@/app/lib/api";
+import { api } from "../../../../../lib/api";
 
 export default function BriefPage() {
   const [idea, setIdea] = useState("");
@@ -21,7 +21,7 @@ export default function BriefPage() {
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      <div className="card space-y-3">
+      <div className="glass space-y-3 p-6">
         <h2 className="text-xl font-semibold">Brief</h2>
         <input className="input" placeholder="Ideia" value={idea} onChange={e=>setIdea(e.target.value)} />
         <input className="input" placeholder="Segmento" value={segment} onChange={e=>setSegment(e.target.value)} />
@@ -30,8 +30,8 @@ export default function BriefPage() {
         <input className="input" placeholder="Meta" value={goal} onChange={e=>setGoal(e.target.value)} />
         <button className="btn btn-primary" onClick={analyze}>Analisar brief</button>
       </div>
-      <div className="card whitespace-pre-wrap">
-        {out || <span style={{ color:"var(--muted)" }}>O resultado aparecerá aqui…</span>}
+      <div className="glass whitespace-pre-wrap p-6">
+        {out || <span className="opacity-70">O resultado aparecerá aqui…</span>}
       </div>
     </div>
   );

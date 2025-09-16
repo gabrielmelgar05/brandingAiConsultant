@@ -1,33 +1,38 @@
-from fastapi import APIRouter, Depends, HTTPException, Response
+from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
-from app.db import get_session
-from app.models.user import User
-from app.models.schemas import RegisterIn, LoginIn, UserOut
-from app.services.auth import hash_password, verify_password, create_token, get_current_user
+from pydantic import BaseModel
+from ..db import engine
+from ..models import User
+from ..security import verify_password, hash_password, create_access_token
+from ..deps import get_db, get_current_user
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-@router.post("/register", response_model=UserOut)
-def register(data: RegisterIn, s: Session = Depends(get_session)):
-    if s.exec(select(User).where(User.email == data.email)).first():
-        raise HTTPException(status_code=400, detail="E-mail já cadastrado")
-    u = User(email=data.email, name=data.name, hashed_password=hash_password(data.password))
-    s.add(u); s.commit(); s.refresh(u)
-    return UserOut(id=u.id, email=u.email, name=u.name, role=u.role)
+class RegisterIn(BaseModel):
+    name: str
+    email: str
+    password: str
 
-@router.post("/login", response_model=UserOut)
-def login(data: LoginIn, res: Response, s: Session = Depends(get_session)):
-    u = s.exec(select(User).where(User.email == data.email)).first()
-    if not u or not verify_password(data.password, u.hashed_password):
-        raise HTTPException(status_code=401, detail="Credenciais inválidas")
-    res.set_cookie("access_token", create_token(u.email), httponly=True, samesite="lax", secure=False, max_age=7200, path="/")
-    return UserOut(id=u.id, email=u.email, name=u.name, role=u.role)
+@router.post("/register")
+def register(data: RegisterIn, db: Session = Depends(get_db)):
+    if db.exec(select(User).where(User.email == data.email)).first():
+        raise HTTPException(400, "Email já cadastrado")
+    u = User(name=data.name, email=data.email, password_hash=hash_password(data.password))
+    db.add(u); db.commit(); db.refresh(u)
+    return {"id": u.id, "email": u.email}
 
-@router.post("/logout")
-def logout(res: Response):
-    res.delete_cookie("access_token", path="/")
-    return {"ok": True}
+class LoginIn(BaseModel):
+    email: str
+    password: str
 
-@router.get("/me", response_model=UserOut)
-def me(current=Depends(get_current_user)):
-    return current
+@router.post("/login")
+def login(data: LoginIn, db: Session = Depends(get_db)):
+    u = db.exec(select(User).where(User.email == data.email)).first()
+    if not u or not verify_password(data.password, u.password_hash):
+        raise HTTPException(401, "Credenciais inválidas")
+    token = create_access_token({"sub": u.id, "email": u.email, "is_admin": u.is_admin})
+    return {"access_token": token, "token_type": "bearer"}
+
+@router.get("/me")
+def me(user: User = Depends(get_current_user)):
+    return {"id": user.id, "name": user.name, "email": user.email, "is_admin": user.is_admin}

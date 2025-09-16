@@ -7,8 +7,8 @@ export default function ProjectsPage() {
         <h1 className="text-2xl font-bold">Projetos</h1>
         <Link href="/projects/new" className="btn btn-primary">Novo projeto</Link>
       </div>
-      <div className="card">
-        <p style={{ color:"var(--muted)" }}>Você ainda não tem projetos.</p>
+      <div className="glass p-6">
+        <p className="opacity-80">Você ainda não tem projetos.</p>
       </div>
     </div>
   );
